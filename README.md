@@ -1,10 +1,10 @@
-# 🚕 NYC Taxi Trips (2018) - Gestión de Datos para IA
+# NYC Taxi Trips (2018) - Gestión de Datos para IA
 
 Este repositorio contiene la arquitectura y el flujo de procesamiento de datos para el caso de estudio **Google Cloud NYC Taxi Trips (2018)**. 
 
 El proyecto fue desarrollado bajo un enfoque académico utilizando una **Arquitectura de Pipeline Híbrido de IA**, ideal para procesar grandes volúmenes de datos históricos (lotes) y preparar la información para el entrenamiento de modelos de Machine Learning.
 
-## 🏗️ Arquitectura y Tecnologías
+## Arquitectura y Tecnologías
 
 El flujo de trabajo se divide en 4 fases basadas en la metodología PMBOK, utilizando el siguiente stack tecnológico:
 
@@ -13,7 +13,7 @@ El flujo de trabajo se divide en 4 fases basadas en la metodología PMBOK, utili
 * **Contenedores y Portabilidad:** Docker
 * **Automatización CI/CD:** GitHub Actions
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 * `/docs`: Documentación técnica (DFD, PMBOK, WBS, Diccionario de Datos).
 * `/notebooks`: Cuadernos de Jupyter para análisis exploratorio (EDA) y limpieza.
@@ -21,7 +21,7 @@ El flujo de trabajo se divide en 4 fases basadas en la metodología PMBOK, utili
 * `.github/workflows`: Archivos de configuración para el pipeline automatizado (CI/CD).
 * `Dockerfile`: Instrucciones para levantar el entorno contenerizado.
 
-## 🚀 Cómo ejecutar este proyecto localmente
+## Cómo ejecutar este proyecto localmente
 
 Sigue estos pasos para levantar el entorno de desarrollo en tu máquina asegurando la misma configuración para todo el equipo.
 
