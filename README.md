@@ -17,3 +17,11 @@
   - Estandarización de tipos de datos convirtiendo las marcas de tiempo a formato `datetime64`.
 - **Creación de Columnas Derivadas:** Construcción de la métrica de negocio `trip_duration_minutes` calculada programáticamente mediante la diferencia temporal entre el término (`dropoff_datetime`) y el inicio (`pickup_datetime`) del viaje en taxi.
 - **Persistencia Procesada:** Dataset limpio y estructurado almacenado en `/data/processed/nyc_taxi_2018_clean.parquet`.
+
+## Etapa 3: Validación Estructural y Semántica de Datos
+- **Script Executable:** `3_validacion.py`
+- **Descripción:** Implementación de un proceso automatizado de auditoría y control de calidad sobre la capa procesada del dataset, asegurando el cumplimiento estricto de las restricciones lógicas previas a la persistencia relacional.
+- **Reglas de Control de Calidad Ejecutadas:**
+  - *Validación Estructural:* Verificación de la presencia física de columnas obligatorias requeridas para el negocio y auditoría del tipo de dato numérico en campos financieros.
+  - *Validación Semántica:* Control de coherencia lógica temporal (comprobando que la fecha de término no sea menor o igual a la de inicio) y coherencia financiera (alertando si existen registros anomalías donde el monto total cobrado sea inferior a la tarifa base asignada).
+- **Trazabilidad y Reportabilidad:** Generación automática de un reporte de calidad persistido en el directorio `/data/reports/reporte_errores.txt` para garantizar la reproducibilidad y el monitoreo del flujo DataOps.
