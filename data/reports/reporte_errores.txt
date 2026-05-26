@@ -1,0 +1,5 @@
+=== REPORTE DE VALIDACIÓN: NYC TAXI TRIPS 2018 ===
+
+ESTADO: ADVERTENCIA - Se detectaron 1 anomalías.
+
+- [ESTRUCTURAL] La columna 'total_amount' no es de tipo numérico.
