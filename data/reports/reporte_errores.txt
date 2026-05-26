@@ -1,5 +1,9 @@
-=== REPORTE DE VALIDACIÓN: NYC TAXI TRIPS 2018 ===
+=== REPORTE DE CALIDAD DE DATOS (DATA QUALITY) ===
+Proyecto: NYC Taxi Trips - Modelo Predictivo de Tarifas
+====================================================
 
-ESTADO: ADVERTENCIA - Se detectaron 1 anomalías.
+ESTADO: ADVERTENCIA (🟡) - 3 anomalías detectadas.
 
-- [ESTRUCTURAL] La columna 'total_amount' no es de tipo numérico.
+- [SEMÁNTICA] Se detectaron 101 viajes con un total_amount menor a $1.00 USD (Posible error de taxímetro).
+- [SEMÁNTICA] Se detectaron 2 viajes con distancias superiores a 100 millas (Posible error de GPS).
+- [SEMÁNTICA] Se detectaron 17 viajes donde dropoff_datetime <= pickup_datetime.
