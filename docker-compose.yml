@@ -1,0 +1,31 @@
+services:
+  pipeline_app:
+    build: .
+    container_name: dataops_python
+    volumes:
+      - .:/app
+      # Volumen CRÍTICO para la autenticación en Google Cloud
+      # Debes tener tu archivo de credenciales JSON en la misma carpeta
+      - ./credentials.json:/app/credentials.json:ro
+    environment:
+      # Le decimos a la librería de Google dónde están las credenciales
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+    depends_on:
+      - postgres_db
+    # Mantiene el contenedor vivo para que entremos a ejecutar los scripts
+    tty: true 
+
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: dataops_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: nyc_taxi_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

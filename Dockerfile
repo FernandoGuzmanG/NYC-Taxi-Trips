@@ -1,18 +1,19 @@
-# 1. Imagen base
-FROM python:3.9-slim
+# Usamos una imagen ligera de Python 3.11
+FROM python:3.11-slim
 
-# 2. Directorio de trabajo
+# Evita que Python genere archivos .pyc y fuerza la salida de logs a la consola
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# 3. Copiar dependencias e instalarlas
+# Instalamos dependencias del sistema necesarias para compilar psycopg2
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+
+# Copiamos e instalamos los requerimientos
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Copiar el resto del código
-COPY . .
-
-# 5. Puerto a exponer
-EXPOSE 5000
-
-# 6. Comando de inicio
-CMD ["python", "app.py"]
+# El código se montará como volumen, así que no necesitamos hacer COPY . . aquí
+CMD ["bash"]
