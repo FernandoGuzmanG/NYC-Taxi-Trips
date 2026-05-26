@@ -1,27 +1,34 @@
-# NYC Taxi Trips (2018) - Pipeline de Datos
+# NYC Taxi Trips (2018) - DataOps Pipeline para Machine Learning
 
-## Etapa 1: Ingesta de Datos Automatizada
-- **Fuente de Origen:** `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2018`
-- **Script Executable:** `1_ingesta_y_eda.py`
-- **Descripción:** Extracción automatizada de una muestra de 100,000 registros del mes de enero de 2018. Aplica selección de características en origen (Feature Selection) extrayendo únicamente 10 columnas fundamentales para mitigar latencia de red y optimizar el uso de memoria en memoria local.
-- **Análisis Exploratorio (EDA):** Bloque integrado que evalúa tipos de datos, recuento de valores nulos y estadísticas descriptivas para la identificación temprana de anomalías operacionales.
-- **Entorno Técnico:** Infraestructura portable basada en contenedores Docker (Python 3.11-slim) con volumen enlazado.
-- **Persistencia Inicial:** Datos en crudo almacenados en formato columnar optimizado `/data/raw/nyc_taxi_2018_raw.parquet`.
+Este repositorio contiene la implementación técnica de un pipeline de datos (DataOps) enfocado en la preparación, limpieza y modelado dimensional del dataset público de viajes en taxi de Nueva York (2018). 
 
-## Etapa 2: Limpieza y Transformación del Dataset
-- **Script Executable:** `2_limpieza.py`
-- **Descripción:** Procesamiento automatizado de la capa de datos en crudo para asegurar consistencia e integridad.
-- **Criterios Técnicos de Limpieza:**
-  - Eliminación sistemática de registros con valores nulos (`dropna`) y filas duplicadas (`drop_duplicates`).
-  - Filtrado por lógica de negocio: distancias de viaje mayores a 0 millas, cantidad de pasajeros válida (entre 1 y 6) y montos financieros de tarifas no negativos.
-  - Estandarización de tipos de datos convirtiendo las marcas de tiempo a formato `datetime64`.
-- **Creación de Columnas Derivadas:** Construcción de la métrica de negocio `trip_duration_minutes` calculada programáticamente mediante la diferencia temporal entre el término (`dropoff_datetime`) y el inicio (`pickup_datetime`) del viaje en taxi.
-- **Persistencia Procesada:** Dataset limpio y estructurado almacenado en `/data/processed/nyc_taxi_2018_clean.parquet`.
+**Objetivo de Negocio:** La arquitectura conceptual de este proyecto está diseñada explícitamente para alimentar un **Modelo de Regresión de Machine Learning** cuyo propósito es predecir la tarifa total (`total_amount`) de un viaje basándose en factores geográficos y temporales.
 
-## Etapa 3: Validación Estructural y Semántica de Datos
-- **Script Executable:** `3_validacion.py`
-- **Descripción:** Implementación de un proceso automatizado de auditoría y control de calidad sobre la capa procesada del dataset, asegurando el cumplimiento estricto de las restricciones lógicas previas a la persistencia relacional.
-- **Reglas de Control de Calidad Ejecutadas:**
-  - *Validación Estructural:* Verificación de la presencia física de columnas obligatorias requeridas para el negocio y auditoría del tipo de dato numérico en campos financieros.
-  - *Validación Semántica:* Control de coherencia lógica temporal (comprobando que la fecha de término no sea menor o igual a la de inicio) y coherencia financiera (alertando si existen registros anomalías donde el monto total cobrado sea inferior a la tarifa base asignada).
-- **Trazabilidad y Reportabilidad:** Generación automática de un reporte de calidad persistido en el directorio `/data/reports/reporte_errores.txt` para garantizar la reproducibilidad y el monitoreo del flujo DataOps.
+---
+
+## Arquitectura y Tecnologías
+El proyecto implementa un flujo híbrido escalable utilizando las siguientes tecnologías:
+* **Google Cloud BigQuery:** Como Data Warehouse de origen para la extracción optimizada mediante SQL.
+* **Python (Pandas):** Para el procesamiento en memoria, limpieza, Feature Engineering y validación semántica.
+* **Docker & Docker Compose:** Para garantizar la portabilidad total del entorno de ejecución e infraestructura.
+* **PostgreSQL (Esquema en Estrella):** Como repositorio relacional de destino optimizado para consultas analíticas.
+* **Formato Parquet:** Para la persistencia eficiente de datos intermedios.
+
+---
+
+## Requisitos Previos (Prerequisites)
+Para ejecutar este pipeline desde cero en cualquier máquina, necesitas contar con:
+1. **Docker Desktop** instalado y en ejecución.
+2. Una cuenta activa en **Google Cloud Platform (GCP)**.
+3. Un archivo de credenciales de cuenta de servicio de GCP (`credentials.json`) con permisos de **Usuario de BigQuery** en el proyecto correspondiente.
+
+---
+
+## Guía de Instalación y Configuración
+
+Sigue estos pasos para levantar el entorno:
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/TU_USUARIO/NYC-Taxi-Trips.git](https://github.com/TU_USUARIO/NYC-Taxi-Trips.git)
+   cd NYC-Taxi-Trips

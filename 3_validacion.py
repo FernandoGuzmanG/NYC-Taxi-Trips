@@ -5,7 +5,7 @@ import os
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def validar_calidad_datos():
-    logging.info("--- Validación Estructural y Semántica ---")
+    logging.info("--- Paso 3: Validación Estructural y Semántica ---")
     
     ruta_processed = 'data/processed/nyc_taxi_2018_clean.parquet'
     ruta_reporte = 'data/reports/reporte_errores.txt'

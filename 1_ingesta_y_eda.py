@@ -13,7 +13,7 @@ def preparar_entorno():
     logging.info("Estructura de directorios verificada/creada.")
 
 def ingestar_datos():
-    logging.info("Iniciando proceso de ingesta de datos (Muestra 10% - Enero 2018)...")
+    logging.info("--- Paso 1: Iniciando proceso de ingesta de datos (Muestra 10% - Enero 2018) ---")
     
     project_id = 'inner-tokenizer-491314-d3' 
     client = bigquery.Client(project=project_id)

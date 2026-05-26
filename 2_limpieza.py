@@ -4,7 +4,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def procesar_datos():
-    logging.info("--- Limpieza y Feature Engineering ---")
+    logging.info("--- Paso 2: Limpieza y Feature Engineering ---")
     
     ruta_raw = 'data/raw/nyc_taxi_2018_raw.parquet'
     ruta_processed = 'data/processed/nyc_taxi_2018_clean.parquet'
