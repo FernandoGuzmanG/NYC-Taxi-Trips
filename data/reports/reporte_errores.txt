@@ -4,6 +4,6 @@ Proyecto: NYC Taxi Trips - Modelo Predictivo de Tarifas
 
 ESTADO: ADVERTENCIA (🟡) - 3 anomalías detectadas.
 
-- [SEMÁNTICA] Se detectaron 101 viajes con un total_amount menor a $1.00 USD (Posible error de taxímetro).
+- [SEMÁNTICA] Se detectaron 89 viajes con un total_amount menor a $1.00 USD (Posible error de taxímetro).
 - [SEMÁNTICA] Se detectaron 2 viajes con distancias superiores a 100 millas (Posible error de GPS).
-- [SEMÁNTICA] Se detectaron 17 viajes donde dropoff_datetime <= pickup_datetime.
+- [SEMÁNTICA] Se detectaron 25 viajes donde dropoff_datetime <= pickup_datetime.
